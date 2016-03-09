@@ -11,14 +11,20 @@
 #include <algorithm>
 #define PB push_back
 using namespace std;
+void gcd(int a,int b,int &d,int &x,int &y){
+    if(!b){
+		d=a;
+		x=1;
+		y=0;
+		return;
+	}
+    gcd(b,a%b,d,y,x);
+    y-=x*(a/b);
+}
 int main(){
-	int a,b;
+	int a,b,d,x,y;
 	scanf("%d%d",&a,&b);
-	if(__gcd(a,b)!=1)puts("-1");
-	for(int i=0;i<b;i++)
-		if((i*a)%b==1){
-			printf("%d\n",i);
-			break;
-		}
+	gcd(a,b,d,x,y);
+	printf("%d\n",d==1?(b+x)%b:-1);
 }
 
